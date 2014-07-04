@@ -6,6 +6,12 @@ namespace Veneer.Contracts.DataContracts
     [DataContract]
     public class ContentSection
     {
+        public ContentSection()
+        {
+            Styles = new List<ContentStyle>();
+            Scripts = new List<ContentScript>();
+        }
+
         [DataMember]
         public string Id { get; set; }
 

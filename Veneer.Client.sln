@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veneer.Client.Tests", "Vene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veneer.Contracts", "Veneer.Contracts\Veneer.Contracts.csproj", "{34489EEA-39D1-48C2-AA9D-890A36E3F215}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veneer.Contracts.Tests", "Veneer.Contracts.Tests\Veneer.Contracts.Tests.csproj", "{01BE2538-8411-453A-9F5B-84A70DC282D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{B092F594-4E0E-4519-978F-93F70FD1AF02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{F708E50D-CA1A-4978-8DDA-43A05686342B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +33,18 @@ Global
 		{34489EEA-39D1-48C2-AA9D-890A36E3F215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34489EEA-39D1-48C2-AA9D-890A36E3F215}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34489EEA-39D1-48C2-AA9D-890A36E3F215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01BE2538-8411-453A-9F5B-84A70DC282D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01BE2538-8411-453A-9F5B-84A70DC282D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01BE2538-8411-453A-9F5B-84A70DC282D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01BE2538-8411-453A-9F5B-84A70DC282D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21E81906-4A05-4D42-BDA4-78F5C8EA383A} = {B092F594-4E0E-4519-978F-93F70FD1AF02}
+		{01BE2538-8411-453A-9F5B-84A70DC282D4} = {B092F594-4E0E-4519-978F-93F70FD1AF02}
+		{7655B912-F047-40B6-80EE-A5A389D3264F} = {F708E50D-CA1A-4978-8DDA-43A05686342B}
+		{34489EEA-39D1-48C2-AA9D-890A36E3F215} = {F708E50D-CA1A-4978-8DDA-43A05686342B}
 	EndGlobalSection
 EndGlobal

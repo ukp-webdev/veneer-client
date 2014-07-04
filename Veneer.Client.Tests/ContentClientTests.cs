@@ -12,7 +12,7 @@ namespace Veneer.Client.Tests
         {
 
             // Arrange
-            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "http://veneer.service.local.uk/api/Content/";
+            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "http://veneer.service.local.parliament.uk/api/Content/";
             var client = new ContentClient();
             
             // Act
