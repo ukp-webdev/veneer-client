@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 using Veneer.Contracts.DataContracts;
+using Veneer.Contracts.Enums;
 
 namespace Veneer.Contracts.ServiceContracts
 {
@@ -9,6 +10,6 @@ namespace Veneer.Contracts.ServiceContracts
     {
         [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        Content Get(string section, string highlight);
+        Content Get(ContentTypes section);
     }
 }

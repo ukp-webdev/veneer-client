@@ -46,6 +46,7 @@
     <Compile Include="DataContracts\ContentScript.cs" />
     <Compile Include="DataContracts\ContentSection.cs" />
     <Compile Include="DataContracts\ContentStyle.cs" />
+    <Compile Include="Enums\ContentTypes.cs" />
     <Compile Include="ServiceContracts\IContentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

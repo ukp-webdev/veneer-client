@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01BE2538-8411-453A-9F5B-84A70DC282D4}</ProjectGuid>
+    <ProjectGuid>{190A5BFA-CEE1-4D99-B68C-DAB1373EE1EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Veneer.Contracts.Tests</RootNamespace>
-    <AssemblyName>Veneer.Contracts.Tests</AssemblyName>
+    <RootNamespace>Veneer.Client.Web.Tests</RootNamespace>
+    <AssemblyName>Veneer.Client.Web.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,13 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContractTests.cs" />
+    <Compile Include="ContentExtensionTests.cs" />
+    <Compile Include="HomeControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteStructureTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Veneer.Client.Web\Veneer.Client.Web.csproj">
+      <Project>{2ef6a456-448a-4629-a68e-56c629d2b2e4}</Project>
+      <Name>Veneer.Client.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Veneer.Contracts\Veneer.Contracts.csproj">
       <Project>{34489eea-39d1-48c2-aa9d-890a36e3f215}</Project>
       <Name>Veneer.Contracts</Name>

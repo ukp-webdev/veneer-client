@@ -136,7 +136,7 @@ namespace Veneer.Contracts.Tests
         public void ContentStyle_ToString_returns_empty_string_if_no_html_or_url_set()
         {
             // Arrange
-            var contentStyle = new ContentScript();
+            var contentStyle = new ContentStyle();
 
             // Act
             var html = contentStyle.ToString();

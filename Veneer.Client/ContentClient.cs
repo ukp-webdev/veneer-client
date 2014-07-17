@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Veneer.Contracts.DataContracts;
+using Veneer.Contracts.Enums;
 using Veneer.Contracts.ServiceContracts;
 using System.ServiceModel.Web;
 
@@ -29,9 +30,9 @@ namespace Veneer.Client
             }
         }
 
-        public Content Get(string section, string highlight)
+        public Content Get(ContentTypes section)
         {
-            return ContentService.Get(section, highlight);
+            return ContentService.Get(section);
         }
     }
 }

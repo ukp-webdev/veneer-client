@@ -1,0 +1,4 @@
+﻿@foreach (var cssLink in @Model.StyleUrls)
+{
+    <link rel="stylesheet" type="text/css" href="@Html.Raw(cssLink)" />
+}

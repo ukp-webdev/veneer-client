@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Veneer.Client")]
+[assembly: AssemblyTitle("Veneer.Client.Web.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Houses of Parliament")]
-[assembly: AssemblyProduct("Veneer.Client")]
+[assembly: AssemblyProduct("Veneer.Client.Web.Tests")]
 [assembly: AssemblyCopyright("Copyright © Houses of Parliament 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e40851a8-0387-4709-a439-d93822c39951")]
+[assembly: Guid("cf539a72-a816-48c0-882c-c1caedd90042")]
 
 // Version information for an assembly consists of the following four values:
 //
