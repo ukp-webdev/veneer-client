@@ -110,9 +110,44 @@ namespace Veneer.Client.Web.Tests
                 }
             };
 
+            var headerWithoutMegaNavContent = new Content
+            {
+                Sections = new List<ContentSection>
+                {
+                    new ContentSection
+                    {
+                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
+                        Html = "header",
+                        Scripts = new List<ContentScript>
+                        {
+                            new ContentScript
+                            {
+                                Url = new Uri("http://scripts.com/header-nomeganav")
+                            },
+                            new ContentScript
+                            {
+                                Url = new Uri("http://scripts.com/common")
+                            }
+                        },
+                        Styles = new List<ContentStyle>
+                        {
+                            new ContentStyle
+                            {
+                                Url = new Uri("http://styles.com/header-nomeganav")
+                            },
+                            new ContentStyle
+                            {
+                                Url = new Uri("http://styles.com/common")
+                            }
+                        }
+                    }
+                }
+            };
+
             contentService.Setup(x => x.Get(ContentTypes.Footer)).Returns(footerContent);
             contentService.Setup(x => x.Get(ContentTypes.FatFooter)).Returns(fatFooterContent);
             contentService.Setup(x => x.Get(ContentTypes.HeaderWithMegaNav)).Returns(headerWithMegaNavContent);
+            contentService.Setup(x => x.Get(ContentTypes.HeaderWithoutMegaNav)).Returns(headerWithoutMegaNavContent);
 
             var controller = new HomeController(contentService.Object);
 
@@ -244,9 +279,44 @@ namespace Veneer.Client.Web.Tests
                 }
             };
 
+            var headerWithoutMegaNavContent = new Content
+            {
+                Sections = new List<ContentSection>
+                {
+                    new ContentSection
+                    {
+                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
+                        Html = "header",
+                        Scripts = new List<ContentScript>
+                        {
+                            new ContentScript
+                            {
+                                Url = new Uri("http://scripts.com/header-nomeganav")
+                            },
+                            new ContentScript
+                            {
+                                Url = new Uri("http://scripts.com/common")
+                            }
+                        },
+                        Styles = new List<ContentStyle>
+                        {
+                            new ContentStyle
+                            {
+                                Url = new Uri("http://styles.com/header-nomeganav")
+                            },
+                            new ContentStyle
+                            {
+                                Url = new Uri("http://styles.com/common")
+                            }
+                        }
+                    }
+                }
+            };
+
             contentService.Setup(x => x.Get(ContentTypes.Footer)).Returns(footerContent);
             contentService.Setup(x => x.Get(ContentTypes.FatFooter)).Returns(fatFooterContent);
             contentService.Setup(x => x.Get(ContentTypes.HeaderWithMegaNav)).Returns(headerWithMegaNavContent);
+            contentService.Setup(x => x.Get(ContentTypes.HeaderWithoutMegaNav)).Returns(headerWithoutMegaNavContent);
 
             var controller = new HomeController(contentService.Object);
 

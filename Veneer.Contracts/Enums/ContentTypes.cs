@@ -5,6 +5,7 @@ namespace Veneer.Contracts.Enums
     {
         Footer,
         FatFooter,
-        HeaderWithMegaNav
+        HeaderWithMegaNav,
+        HeaderWithoutMegaNav
     }
 }

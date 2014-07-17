@@ -29,7 +29,8 @@ namespace Veneer.Client.Web.Controllers
             {
                 ContentTypes.Footer,
                 ContentTypes.FatFooter,
-                ContentTypes.HeaderWithMegaNav
+                ContentTypes.HeaderWithMegaNav,
+                ContentTypes.HeaderWithoutMegaNav
             });
 
             return View(model);
