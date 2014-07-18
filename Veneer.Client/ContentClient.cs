@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Veneer.Client.Caching;
 using Veneer.Contracts.DataContracts;
 using Veneer.Contracts.Enums;
 using Veneer.Contracts.ServiceContracts;
@@ -12,6 +13,18 @@ namespace Veneer.Client
     {
         private const string ServiceUrlKey = "VeneerServiceUrl";
         private IContentService _service;
+        private ILocalCache _localCache;
+
+        public ContentClient()
+        {
+            _localCache = new LocalCache();
+        }
+
+        public ContentClient(IContentService service, ILocalCache localCache)
+        {
+            _service = service;
+            _localCache = localCache;
+        }
 
         public IContentService ContentService
         {
@@ -24,7 +37,7 @@ namespace Veneer.Client
 
                 var serviceUrl = new Uri(ConfigurationManager.AppSettings[ServiceUrlKey]);
 
-                var channelFactory = new WebChannelFactory<IContentService>(serviceUrl);
+                var channelFactory = new WebChannelFactory<IContentService>(serviceUrl);                
                 _service = channelFactory.CreateChannel();
                 return _service;
             }
@@ -32,7 +45,16 @@ namespace Veneer.Client
 
         public Content Get(ContentTypes section)
         {
-            return ContentService.Get(section);
+            try
+            {
+                var content = ContentService.Get(section);
+                _localCache.WriteToCache(section, content);
+                return content;
+            }
+            catch (Exception)
+            {
+                return _localCache.ReadFromCache(section);
+            }
         }
     }
 }

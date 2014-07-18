@@ -9,19 +9,34 @@ namespace Veneer.Client.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IContentService _veneerClient;
+        private readonly IContentService _veneerClient;        
 
         public HomeController()
         {
-            _veneerClient = new ContentClient();
+            _veneerClient = new ContentClient();            
         }
 
         public HomeController(IContentService clientService)
         {
-            _veneerClient = clientService;
+            _veneerClient = clientService;            
         }
 
         public ActionResult Index()
+        {
+            var model = new SiteStructure();
+
+            PopulateSiteStructureFromContent(model, new List<ContentTypes>
+            {
+                ContentTypes.Footer,
+                ContentTypes.FatFooter,
+                ContentTypes.HeaderWithMegaNav,
+                ContentTypes.HeaderWithoutMegaNav
+            });
+
+            return View(model);
+        }
+
+        public ActionResult WithMegaNav()
         {
             var model = new SiteStructure();
 

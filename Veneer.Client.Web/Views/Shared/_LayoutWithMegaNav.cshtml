@@ -1,0 +1,23 @@
+﻿@using Veneer.Client.Web.Extensions
+@using Veneer.Contracts.Enums
+@model Veneer.Client.Web.Models.SiteStructure
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Html.Partial("_Styles")
+    @Html.Partial("_Scripts")
+</head>
+<body class="main">
+    <div id="wrapper">
+        @Html.Content(Model, ContentTypes.HeaderWithMegaNav)
+
+        @RenderBody()
+        
+        @Html.Content(Model, ContentTypes.FatFooter)
+        @Html.Content(Model, ContentTypes.Footer)
+    </div>
+</body>
+</html>
