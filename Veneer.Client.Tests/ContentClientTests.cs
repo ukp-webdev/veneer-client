@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
 using Moq;
 using NUnit.Framework;
 using Veneer.Client.Caching;
@@ -19,7 +16,7 @@ namespace Veneer.Client.Tests
         [TestFixtureSetUp]
         public void SetupAppSettings()
         {
-            ConfigurationManager.AppSettings["LocalCacheFolder"] = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ConfigurationManager.AppSettings["LocalCacheFolder"] = "C:\\dev\\Veneer\\Client\\";
         }
 
         [Test, Category("Integration")]
@@ -61,7 +58,7 @@ namespace Veneer.Client.Tests
             var service = new Mock<IContentService>();
             var content = new Content
             {
-                RefreshDate = DateTime.Now.ToString(CultureInfo.InvariantCulture),
+                RefreshDate = DateTime.Now,
                 Sections = new List<ContentSection>
                 {
                     new ContentSection
@@ -95,7 +92,7 @@ namespace Veneer.Client.Tests
             cache.Setup(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()));
             var content = new Content
             { 
-                RefreshDate = DateTime.Now.ToString(CultureInfo.InvariantCulture), 
+                RefreshDate = DateTime.Now, 
                 Sections = new List<ContentSection>
                 {
                     new ContentSection

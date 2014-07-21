@@ -32,10 +32,10 @@ namespace Veneer.Client.Caching
                 lastRefreshDate = null;
             }
 
-            if (!lastRefreshDate.HasValue || lastRefreshDate.Value < content.RefreshDateTime)
+            if (!lastRefreshDate.HasValue || lastRefreshDate.Value < content.RefreshDate)
             {
                 _storageHandler.WriteToStorage(contentType, content);
-                _contentRefreshTimes[contentType.ToString()] = content.RefreshDateTime;
+                _contentRefreshTimes[contentType.ToString()] = content.RefreshDate;
             }
         }
 

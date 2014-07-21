@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -18,7 +17,7 @@ namespace Veneer.Client.Tests
         [SetUp]
         public void SetupConfiguration()
         {
-            ConfigurationManager.AppSettings["LocalCacheFolder"] = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ConfigurationManager.AppSettings["LocalCacheFolder"] = "C:\\dev\\Veneer\\Client\\";
         }
 
         [Test]
@@ -29,7 +28,7 @@ namespace Veneer.Client.Tests
                 // Arrange
                 ConfigurationManager.AppSettings["LocalCacheFolder"] = string.Empty;
                 var storageHandler = new StorageHandler();
-                var content = new Content {RefreshDate = DateTime.Now.ToString(CultureInfo.InvariantCulture)};
+                var content = new Content {RefreshDate = DateTime.Now};
 
                 // Act
                 storageHandler.WriteToStorage(ContentTypes.HeaderWithoutMegaNav, content);
@@ -62,7 +61,7 @@ namespace Veneer.Client.Tests
             var storageHandler = new StorageHandler();
             var content = new Content 
             {
-                RefreshDate = DateTime.Now.ToString(CultureInfo.InvariantCulture),
+                RefreshDate = DateTime.Now,
                 Sections = new List<ContentSection>
                 {
                     new ContentSection
@@ -76,8 +75,7 @@ namespace Veneer.Client.Tests
             // Act
             storageHandler.WriteToStorage(ContentTypes.HeaderWithMegaNav, content);
 
-            var fileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +
-                           "\\ContentCache-HeaderWithMegaNav.cache";
+            const string fileName = "C:\\dev\\Veneer\\Client\\ContentCache-HeaderWithMegaNav.cache";
 
             var fileContents = File.ReadAllText(fileName);
 

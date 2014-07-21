@@ -57,7 +57,7 @@ namespace Veneer.Client.Tests
                         Html = "<div id='footer' />"
                     }
                 },
-                RefreshDateTime = contentRefreshDate
+                RefreshDate = contentRefreshDate
             };
 
             // Act
@@ -87,7 +87,7 @@ namespace Veneer.Client.Tests
                         Html = "<div id='footer' />"
                     }
                 },
-                RefreshDateTime = new DateTime(2014, 07, 07)
+                RefreshDate = new DateTime(2014, 07, 07)
             };
 
             var newFooterContent = new Content
@@ -100,7 +100,7 @@ namespace Veneer.Client.Tests
                         Html = "<div id='footer'>footer</div>"
                     }
                 },
-                RefreshDateTime = new DateTime(2014, 07, 08)
+                RefreshDate = new DateTime(2014, 07, 08)
             };
 
             // Act
@@ -117,7 +117,7 @@ namespace Veneer.Client.Tests
             // Arrange
             var cachedContent = new Content
             {
-                RefreshDateTime = new DateTime(2014, 01, 01),
+                RefreshDate = new DateTime(2014, 01, 01),
                 Sections = new List<ContentSection>
                 {
                     new ContentSection
