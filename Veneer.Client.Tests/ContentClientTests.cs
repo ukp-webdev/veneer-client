@@ -119,7 +119,7 @@ namespace Veneer.Client.Tests
             // Arrange
             var service = new Mock<IContentService>();
 
-            service.Setup(x => x.Get(ContentTypes.FatFooter)).Throws(new Exception("Unit test exception"));
+            service.Setup(x => x.Get(ContentTypes.FatFooter)).Returns((Content) null);
             var cache = new Mock<ILocalCache>();
             cache.Setup(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()));            
             cache.Setup(x => x.ReadFromCache(ContentTypes.FatFooter)).Returns((Content)null);

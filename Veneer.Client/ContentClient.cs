@@ -48,8 +48,12 @@ namespace Veneer.Client
             try
             {
                 var content = ContentService.Get(section);
-                _localCache.WriteToCache(section, content);
-                return content;
+                if (content != null)
+                {
+                    _localCache.WriteToCache(section, content);
+                    return content;
+                }
+                return _localCache.ReadFromCache(section);
             }
             catch (Exception)
             {

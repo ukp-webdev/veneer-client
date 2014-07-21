@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using NUnit.Framework;
 using Veneer.Client.Caching;
 using Veneer.Contracts.DataContracts;
