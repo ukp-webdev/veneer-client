@@ -27,10 +27,7 @@ namespace Veneer.Client.Web.Controllers
 
             PopulateSiteStructureFromContent(model, new List<ContentTypes>
             {
-                ContentTypes.Footer,
-                ContentTypes.FatFooter,
-                ContentTypes.HeaderWithMegaNav,
-                ContentTypes.HeaderWithoutMegaNav
+                ContentTypes.Intranet_ThinFooter
             });
 
             return View(model);

@@ -12,12 +12,13 @@
 </head>
 <body class="main">
     <div id="wrapper">
-        @Html.Content(Model, ContentTypes.HeaderWithoutMegaNav)
+        @*@Html.Content(Model, ContentTypes.HeaderWithoutMegaNav)*@
 
         @RenderBody()
         
-        @Html.Content(Model, ContentTypes.FatFooter)
-        @Html.Content(Model, ContentTypes.Footer)
+        @*@Html.Content(Model, ContentTypes.FatFooter)
+        @Html.Content(Model, ContentTypes.Footer)*@
+        @Html.Content(Model, ContentTypes.Intranet_ThinFooter)
     </div>
 </body>
 </html>
