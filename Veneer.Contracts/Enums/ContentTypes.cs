@@ -7,6 +7,8 @@ namespace Veneer.Contracts.Enums
         FatFooter,
         HeaderWithMegaNav,
         HeaderWithoutMegaNav,
-        Intranet_ThinFooter
+        Intranet_ThinFooter,
+        Intranet_FatFooter,
+        Intranet_Header
     }
 }
