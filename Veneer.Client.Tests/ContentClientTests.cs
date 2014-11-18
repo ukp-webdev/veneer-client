@@ -44,7 +44,7 @@ namespace Veneer.Client.Tests
             // Act
             var footerContent = client.Get(ContentTypes.Footer);            
             ConfigurationManager.AppSettings["ContentServiceUrl"] = "62fg5432adas@;_90382";  // invalid url so would break if tried to re-init
-            var fatFooterContent = client.Get(ContentTypes.FatFooter);
+            var fatFooterContent = client.Get(ContentTypes.Intranet_FatFooter);
 
             // Assert
             Assert.That(footerContent, Is.Not.Null);
@@ -63,22 +63,22 @@ namespace Veneer.Client.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.FatFooter.ToString(),
+                        Id = ContentTypes.Intranet_FatFooter.ToString(),
                         Html = "fat"
                     }
                 }
             };
-            service.Setup(x => x.Get(ContentTypes.FatFooter)).Returns(content);
+            service.Setup(x => x.Get(ContentTypes.Intranet_FatFooter)).Returns(content);
             var cache = new Mock<ILocalCache>();
-            cache.Setup(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()));
+            cache.Setup(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()));
             var client = new ContentClient(service.Object, cache.Object);
 
             // Act
-            client.Get(ContentTypes.FatFooter);
+            client.Get(ContentTypes.Intranet_FatFooter);
 
             // Assert
-            service.Verify(x => x.Get(ContentTypes.FatFooter), Times.Once);
-            cache.Verify(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()), Times.Once);
+            service.Verify(x => x.Get(ContentTypes.Intranet_FatFooter), Times.Once);
+            cache.Verify(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()), Times.Once);
         }
 
         [Test]
@@ -86,10 +86,10 @@ namespace Veneer.Client.Tests
         {
             // Arrange
             var service = new Mock<IContentService>();
-            
-            service.Setup(x => x.Get(ContentTypes.FatFooter)).Throws(new Exception("Unit test exception"));
+
+            service.Setup(x => x.Get(ContentTypes.Intranet_FatFooter)).Throws(new Exception("Unit test exception"));
             var cache = new Mock<ILocalCache>();
-            cache.Setup(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()));
+            cache.Setup(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()));
             var content = new Content
             { 
                 RefreshDate = DateTime.Now, 
@@ -97,20 +97,20 @@ namespace Veneer.Client.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.FatFooter.ToString()
+                        Id = ContentTypes.Intranet_FatFooter.ToString()
                     }
                 }
             };
-            cache.Setup(x => x.ReadFromCache(ContentTypes.FatFooter)).Returns(content);
+            cache.Setup(x => x.ReadFromCache(ContentTypes.Intranet_FatFooter)).Returns(content);
             var client = new ContentClient(service.Object, cache.Object);
 
             // Act
-            client.Get(ContentTypes.FatFooter);
+            client.Get(ContentTypes.Intranet_FatFooter);
 
             // Assert
-            service.Verify(x => x.Get(ContentTypes.FatFooter), Times.Once);
-            cache.Verify(x => x.ReadFromCache(ContentTypes.FatFooter), Times.Once);
-            cache.Verify(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()), Times.Never);
+            service.Verify(x => x.Get(ContentTypes.Intranet_FatFooter), Times.Once);
+            cache.Verify(x => x.ReadFromCache(ContentTypes.Intranet_FatFooter), Times.Once);
+            cache.Verify(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()), Times.Never);
         }
 
         [Test]
@@ -119,19 +119,19 @@ namespace Veneer.Client.Tests
             // Arrange
             var service = new Mock<IContentService>();
 
-            service.Setup(x => x.Get(ContentTypes.FatFooter)).Returns((Content) null);
+            service.Setup(x => x.Get(ContentTypes.Intranet_FatFooter)).Returns((Content)null);
             var cache = new Mock<ILocalCache>();
-            cache.Setup(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()));            
-            cache.Setup(x => x.ReadFromCache(ContentTypes.FatFooter)).Returns((Content)null);
+            cache.Setup(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()));
+            cache.Setup(x => x.ReadFromCache(ContentTypes.Intranet_FatFooter)).Returns((Content)null);
             var client = new ContentClient(service.Object, cache.Object);
 
             // Act
-            client.Get(ContentTypes.FatFooter);
+            client.Get(ContentTypes.Intranet_FatFooter);
 
             // Assert
-            service.Verify(x => x.Get(ContentTypes.FatFooter), Times.Once);
-            cache.Verify(x => x.ReadFromCache(ContentTypes.FatFooter), Times.Once);
-            cache.Verify(x => x.WriteToCache(ContentTypes.FatFooter, It.IsAny<Content>()), Times.Never);
+            service.Verify(x => x.Get(ContentTypes.Intranet_FatFooter), Times.Once);
+            cache.Verify(x => x.ReadFromCache(ContentTypes.Intranet_FatFooter), Times.Once);
+            cache.Verify(x => x.WriteToCache(ContentTypes.Intranet_FatFooter, It.IsAny<Content>()), Times.Never);
         }
     }
 }
