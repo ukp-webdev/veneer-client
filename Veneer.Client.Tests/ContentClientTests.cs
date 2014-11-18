@@ -24,7 +24,7 @@ namespace Veneer.Client.Tests
         {
 
             // Arrange
-            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "http://localhost:2222/api/Content/";
+            ConfigurationManager.AppSettings["ContentServiceUrl"] = "http://localhost:2222/api/Content/";
             var client = new ContentClient();
             
             // Act
@@ -38,12 +38,12 @@ namespace Veneer.Client.Tests
         public void Content_service_reference_is_only_initialised_once()
         {
             // Arrange
-            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "http://localhost:2222/api/Content/";
+            ConfigurationManager.AppSettings["ContentServiceUrl"] = "http://localhost:2222/api/Content/";
             var client = new ContentClient();
 
             // Act
             var footerContent = client.Get(ContentTypes.Footer);            
-            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "62fg5432adas@;_90382";  // invalid url so would break if tried to re-init
+            ConfigurationManager.AppSettings["ContentServiceUrl"] = "62fg5432adas@;_90382";  // invalid url so would break if tried to re-init
             var fatFooterContent = client.Get(ContentTypes.FatFooter);
 
             // Assert

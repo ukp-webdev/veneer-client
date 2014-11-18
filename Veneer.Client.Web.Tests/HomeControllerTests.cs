@@ -20,7 +20,7 @@ namespace Veneer.Client.Web.Tests
         public void Default_constructor_creates_service_client()
         {
             // Arrange
-            ConfigurationManager.AppSettings["VeneerServiceUrl"] = "http://localhost:2222/api/Content";
+            ConfigurationManager.AppSettings["ContentServiceUrl"] = "http://localhost:2222/api/Content";
             var controller = new HomeController();
 
             // Act 
@@ -45,9 +45,9 @@ namespace Veneer.Client.Web.Tests
             // Assert
             Assert.IsNotNull(siteStructure);
             Assert.That(siteStructure.ContentItems.Count, Is.EqualTo(3));
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.FatFooter.ToString()), Is.Not.Null);
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.Footer.ToString()), Is.Not.Null);
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.HeaderWithMegaNav.ToString()), Is.Not.Null);
+            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.Intranet_FatFooter.ToString()), Is.Not.Null);
+            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.Intranet_ThinFooter.ToString()), Is.Not.Null);
+            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.Intranet_Header.ToString()), Is.Not.Null);
             Assert.That(siteStructure.ScriptUrls.Count, Is.EqualTo(3));
             Assert.That(siteStructure.ScriptUrls.FirstOrDefault(x => x == "http://scripts.com/footer"), Is.Not.Null);
             Assert.That(siteStructure.ScriptUrls.FirstOrDefault(x => x == "http://scripts.com/fat-footer"), Is.Not.Null);
@@ -57,35 +57,7 @@ namespace Veneer.Client.Web.Tests
             Assert.That(siteStructure.StyleUrls.FirstOrDefault(x => x == "http://styles.com/fat-footer"), Is.Not.Null);
             Assert.That(siteStructure.StyleUrls.FirstOrDefault(x => x == "http://styles.com/header"), Is.Not.Null);
         }
-
-        [Test]
-        public void WithMegaNav_retrieves_content_items_from_service_client_and_merges_into_view()
-        {
-            // Arrange
-            var contentService = CreateMockService();
-
-            var controller = new HomeController(contentService.Object);
-
-            // Act
-            var actionResult = controller.WithMegaNav();
-            var siteStructure = ((ViewResult)actionResult).Model as SiteStructure;
-
-            // Assert
-            Assert.IsNotNull(siteStructure);
-            Assert.That(siteStructure.ContentItems.Count, Is.EqualTo(3));
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.FatFooter.ToString()), Is.Not.Null);
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.Footer.ToString()), Is.Not.Null);
-            Assert.That(siteStructure.ContentItems.FirstOrDefault(x => x.Key == ContentTypes.HeaderWithMegaNav.ToString()), Is.Not.Null);
-            Assert.That(siteStructure.ScriptUrls.Count, Is.EqualTo(3));
-            Assert.That(siteStructure.ScriptUrls.FirstOrDefault(x => x == "http://scripts.com/footer"), Is.Not.Null);
-            Assert.That(siteStructure.ScriptUrls.FirstOrDefault(x => x == "http://scripts.com/fat-footer"), Is.Not.Null);
-            Assert.That(siteStructure.ScriptUrls.FirstOrDefault(x => x == "http://scripts.com/header"), Is.Not.Null);
-            Assert.That(siteStructure.StyleUrls.Count, Is.EqualTo(3));
-            Assert.That(siteStructure.StyleUrls.FirstOrDefault(x => x == "http://styles.com/footer"), Is.Not.Null);
-            Assert.That(siteStructure.StyleUrls.FirstOrDefault(x => x == "http://styles.com/fat-footer"), Is.Not.Null);
-            Assert.That(siteStructure.StyleUrls.FirstOrDefault(x => x == "http://styles.com/header"), Is.Not.Null);
-        }
-
+        
         [Test]
         public void Index_deduplicates_scripts_and_styles_in_content_sections()
         {
@@ -98,7 +70,7 @@ namespace Veneer.Client.Web.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.Footer.ToString(),
+                        Id = ContentTypes.Intranet_ThinFooter.ToString(),
                         Html = "footer",
                         Scripts = new List<ContentScript>
                         {
@@ -132,7 +104,7 @@ namespace Veneer.Client.Web.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.FatFooter.ToString(),
+                        Id = ContentTypes.Intranet_FatFooter.ToString(),
                         Html = "fat footer",
                         Scripts = new List<ContentScript>
                         {
@@ -160,13 +132,13 @@ namespace Veneer.Client.Web.Tests
                 }
             };
 
-            var headerWithMegaNavContent = new Content
+            var headerContent = new Content
             {
                 Sections = new List<ContentSection>
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
+                        Id = ContentTypes.Intranet_Header.ToString(),
                         Html = "header",
                         Scripts = new List<ContentScript>
                         {
@@ -194,44 +166,9 @@ namespace Veneer.Client.Web.Tests
                 }
             };
 
-            var headerWithoutMegaNavContent = new Content
-            {
-                Sections = new List<ContentSection>
-                {
-                    new ContentSection
-                    {
-                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
-                        Html = "header",
-                        Scripts = new List<ContentScript>
-                        {
-                            new ContentScript
-                            {
-                                Url = new Uri("http://scripts.com/header-nomeganav")
-                            },
-                            new ContentScript
-                            {
-                                Url = new Uri("http://scripts.com/common")
-                            }
-                        },
-                        Styles = new List<ContentStyle>
-                        {
-                            new ContentStyle
-                            {
-                                Url = new Uri("http://styles.com/header-nomeganav")
-                            },
-                            new ContentStyle
-                            {
-                                Url = new Uri("http://styles.com/common")
-                            }
-                        }
-                    }
-                }
-            };
-
-            contentService.Setup(x => x.Get(ContentTypes.Footer)).Returns(footerContent);
-            contentService.Setup(x => x.Get(ContentTypes.FatFooter)).Returns(fatFooterContent);
-            contentService.Setup(x => x.Get(ContentTypes.HeaderWithMegaNav)).Returns(headerWithMegaNavContent);
-            contentService.Setup(x => x.Get(ContentTypes.HeaderWithoutMegaNav)).Returns(headerWithoutMegaNavContent);
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_ThinFooter)).Returns(footerContent);
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_FatFooter)).Returns(fatFooterContent);
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_Header)).Returns(headerContent);
 
             var controller = new HomeController(contentService.Object);
 
@@ -268,7 +205,7 @@ namespace Veneer.Client.Web.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.Footer.ToString(),
+                        Id = ContentTypes.Intranet_ThinFooter.ToString(),
                         Html = "footer",
                         Scripts = new List<ContentScript>
                         {
@@ -294,7 +231,7 @@ namespace Veneer.Client.Web.Tests
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.FatFooter.ToString(),
+                        Id = ContentTypes.Intranet_FatFooter.ToString(),
                         Html = "fat footer",
                         Scripts = new List<ContentScript>
                         {
@@ -314,13 +251,13 @@ namespace Veneer.Client.Web.Tests
                 }
             };
 
-            var headerWithMegaNavContent = new Content
+            var headerContent = new Content
             {
                 Sections = new List<ContentSection>
                 {
                     new ContentSection
                     {
-                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
+                        Id = ContentTypes.Intranet_Header.ToString(),
                         Html = "header",
                         Scripts = new List<ContentScript>
                         {
@@ -339,45 +276,10 @@ namespace Veneer.Client.Web.Tests
                     }
                 }
             };
-
-            var headerWithoutMegaNavContent = new Content
-            {
-                Sections = new List<ContentSection>
-                {
-                    new ContentSection
-                    {
-                        Id = ContentTypes.HeaderWithMegaNav.ToString(),
-                        Html = "header",
-                        Scripts = new List<ContentScript>
-                        {
-                            new ContentScript
-                            {
-                                Url = new Uri("http://scripts.com/header-nomeganav")
-                            },
-                            new ContentScript
-                            {
-                                Url = new Uri("http://scripts.com/common")
-                            }
-                        },
-                        Styles = new List<ContentStyle>
-                        {
-                            new ContentStyle
-                            {
-                                Url = new Uri("http://styles.com/header-nomeganav")
-                            },
-                            new ContentStyle
-                            {
-                                Url = new Uri("http://styles.com/common")
-                            }
-                        }
-                    }
-                }
-            };
-
-            contentService.Setup(x => x.Get(ContentTypes.Footer)).Returns(footerContent);
-            contentService.Setup(x => x.Get(ContentTypes.FatFooter)).Returns(fatFooterContent);
-            contentService.Setup(x => x.Get(ContentTypes.HeaderWithMegaNav)).Returns(headerWithMegaNavContent);
-            contentService.Setup(x => x.Get(ContentTypes.HeaderWithoutMegaNav)).Returns(headerWithoutMegaNavContent);
+            
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_ThinFooter)).Returns(footerContent);
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_FatFooter)).Returns(fatFooterContent);
+            contentService.Setup(x => x.Get(ContentTypes.Intranet_Header)).Returns(headerContent);            
 
             return contentService;
         }

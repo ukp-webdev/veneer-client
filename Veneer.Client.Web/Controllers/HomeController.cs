@@ -28,28 +28,13 @@ namespace Veneer.Client.Web.Controllers
             PopulateSiteStructureFromContent(model, new List<ContentTypes>
             {
                 ContentTypes.Intranet_ThinFooter,
-                ContentTypes.Intranet_FatFooter ,
+                ContentTypes.Intranet_FatFooter,
                 ContentTypes.Intranet_Header 
-            });
+            });            
 
             return View(model);
         }
-
-        public ActionResult WithMegaNav()
-        {
-            var model = new SiteStructure();
-
-            PopulateSiteStructureFromContent(model, new List<ContentTypes>
-            {
-                ContentTypes.Footer,
-                ContentTypes.FatFooter,
-                ContentTypes.HeaderWithMegaNav,
-                ContentTypes.HeaderWithoutMegaNav
-            });
-
-            return View(model);
-        }
-
+        
         private void PopulateSiteStructureFromContent(SiteStructure model, IEnumerable<ContentTypes> contentTypes)
         {
             foreach (var contentType in contentTypes)

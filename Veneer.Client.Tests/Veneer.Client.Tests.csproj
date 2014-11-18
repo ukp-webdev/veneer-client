@@ -40,6 +40,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScriptsClientTests.cs" />
+    <Compile Include="StylesClientTests.cs" />
+    <Compile Include="MarkupClientTests.cs" />
     <Compile Include="ContentClientTests.cs" />
     <Compile Include="LocalCacheTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

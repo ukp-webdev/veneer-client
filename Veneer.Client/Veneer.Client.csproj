@@ -45,6 +45,9 @@
     <Compile Include="Caching\IStorageHandler.cs" />
     <Compile Include="Caching\LocalCache.cs" />
     <Compile Include="Caching\StorageHandler.cs" />
+    <Compile Include="ScriptsClient.cs" />
+    <Compile Include="StylesClient.cs" />
+    <Compile Include="MarkupClient.cs" />
     <Compile Include="ContentClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
