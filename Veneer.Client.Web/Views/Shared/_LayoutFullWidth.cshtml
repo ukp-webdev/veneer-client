@@ -11,13 +11,13 @@
     @Html.Partial("_Scripts")
 </head>
 <body class="main">
-    <div id="wrapper">
-        @Html.Content(Model, ContentTypes.HeaderWithMegaNav)
+    
+        @Html.Content(Model, ContentTypes.Intranet_Header)
 
         @RenderBody()
-        
-        @Html.Content(Model, ContentTypes.FatFooter)
-        @Html.Content(Model, ContentTypes.Footer)
-    </div>
+
+        @Html.Content(Model, ContentTypes.Intranet_FatFooter)
+        @Html.Content(Model, ContentTypes.Intranet_ThinFooter)
+    
 </body>
 </html>

@@ -160,10 +160,10 @@
     <Content Include="Views\Shared\_Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\WithMegaNav.cshtml" />
+    <Content Include="Views\Home\FullWidth.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_LayoutWithMegaNav.cshtml" />
+    <Content Include="Views\Shared\_LayoutFullWidth.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -35,6 +35,21 @@ namespace Veneer.Client.Web.Controllers
             return View(model);
         }
         
+        public ActionResult FullWidth()
+        {
+            var model = new SiteStructure();
+
+            PopulateSiteStructureFromContent(model, new List<ContentTypes>
+            {
+                ContentTypes.Intranet_ThinFooter,
+                ContentTypes.Intranet_FatFooter,
+                ContentTypes.Intranet_Header 
+            });
+
+            return View(model);
+        }
+        
+
         private void PopulateSiteStructureFromContent(SiteStructure model, IEnumerable<ContentTypes> contentTypes)
         {
             foreach (var contentType in contentTypes)
