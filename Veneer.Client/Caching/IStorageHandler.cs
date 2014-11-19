@@ -1,12 +1,10 @@
-﻿
-using Veneer.Contracts.DataContracts;
-using Veneer.Contracts.Enums;
+﻿using Veneer.Contracts.Enums;
 
 namespace Veneer.Client.Caching
 {
-    public interface IStorageHandler
+    public interface IStorageHandler<T>
     {
-        void WriteToStorage(ContentTypes contentType, Content content);
-        Content ReadFromStorage(ContentTypes contentType);
+        void WriteToStorage(ContentTypes contentType, T content);
+        T ReadFromStorage(ContentTypes contentType);
     }
 }

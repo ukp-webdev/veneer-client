@@ -26,7 +26,7 @@ namespace Veneer.Client.Tests
             {
                 // Arrange
                 ConfigurationManager.AppSettings["LocalCacheFolder"] = string.Empty;
-                var storageHandler = new StorageHandler();
+                var storageHandler = new StorageHandler<Content>();
                 var content = new Content {RefreshDate = DateTime.Now};
 
                 // Act
@@ -44,7 +44,7 @@ namespace Veneer.Client.Tests
         {
             // Arrange
             ConfigurationManager.AppSettings["LocalCacheFolder"] = string.Empty;
-            var storageHandler = new StorageHandler();
+            var storageHandler = new StorageHandler<Content>();
 
             // Act
             var content = storageHandler.ReadFromStorage(ContentTypes.Footer);
@@ -57,7 +57,7 @@ namespace Veneer.Client.Tests
         public void Storage_handler_writes_to_file_at_specified_location()
         {
             // Arrange
-            var storageHandler = new StorageHandler();
+            var storageHandler = new StorageHandler<Content>();
             var content = new Content 
             {
                 RefreshDate = DateTime.Now,

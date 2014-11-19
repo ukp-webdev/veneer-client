@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using Veneer.Contracts.DataContracts;
 using Veneer.Contracts.Enums;
 
 namespace Veneer.Client.Caching
 {
-    public class LocalCache : ILocalCache
+    public class LocalCache<T> : ILocalCache<T>
     {        
         private readonly Dictionary<string, DateTime> _contentRefreshTimes = new Dictionary<string, DateTime>();
-        private readonly IStorageHandler _storageHandler;
+        private readonly IStorageHandler<T> _storageHandler;
 
         public LocalCache()
         {
-            _storageHandler = new StorageHandler();      
+            _storageHandler = new StorageHandler<T>();      
         }
 
-        public LocalCache(IStorageHandler storageHandler)
+        public LocalCache(IStorageHandler<T> storageHandler)
         {
             _storageHandler = storageHandler;
         }
 
-        public void WriteToCache(ContentTypes contentType, Content content)
+        public void WriteToCache(ContentTypes contentType, T content, DateTime refreshDate)
         {
             DateTime? lastRefreshDate;
             try
@@ -32,14 +31,14 @@ namespace Veneer.Client.Caching
                 lastRefreshDate = null;
             }
 
-            if (!lastRefreshDate.HasValue || lastRefreshDate.Value < content.RefreshDate)
+            if (!lastRefreshDate.HasValue || lastRefreshDate.Value < refreshDate)
             {
                 _storageHandler.WriteToStorage(contentType, content);
-                _contentRefreshTimes[contentType.ToString()] = content.RefreshDate;
+                _contentRefreshTimes[contentType.ToString()] = refreshDate;
             }
         }
 
-        public Content ReadFromCache(ContentTypes contentType)
+        public T ReadFromCache(ContentTypes contentType)
         {
             return _storageHandler.ReadFromStorage(contentType);
         }

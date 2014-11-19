@@ -1,12 +1,11 @@
-﻿
-using Veneer.Contracts.DataContracts;
+﻿using System;
 using Veneer.Contracts.Enums;
 
 namespace Veneer.Client.Caching
 {
-    public interface ILocalCache
+    public interface ILocalCache<T>
     {
-        void WriteToCache(ContentTypes contentType, Content content);
-        Content ReadFromCache(ContentTypes contentType);
+        void WriteToCache(ContentTypes contentType, T content, DateTime refreshDate);
+        T ReadFromCache(ContentTypes contentType);
     }
 }

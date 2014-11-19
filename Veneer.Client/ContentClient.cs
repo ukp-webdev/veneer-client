@@ -12,16 +12,16 @@ namespace Veneer.Client
     public class ContentClient : IContentService
     {
         private IContentService _service;
-        private readonly ILocalCache _localCache;
+        private readonly ILocalCache<Content> _localCache;
         
         private const string ServiceUrlKey = "ContentServiceUrl"; 
 
         public ContentClient()
         {
-            _localCache = new LocalCache();
+            _localCache = new LocalCache<Content>();
         }
 
-        public ContentClient(IContentService service, ILocalCache localCache)
+        public ContentClient(IContentService service, ILocalCache<Content> localCache)
         {
             _service = service;
             _localCache = localCache;
@@ -34,7 +34,7 @@ namespace Veneer.Client
                 var content = ContentService.Get(section);
                 if (content != null)
                 {
-                    _localCache.WriteToCache(section, content);
+                    _localCache.WriteToCache(section, content, content.RefreshDate);
                     return content;
                 }
                 return _localCache.ReadFromCache(section);

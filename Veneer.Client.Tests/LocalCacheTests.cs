@@ -16,9 +16,9 @@ namespace Veneer.Client.Tests
         public void LocalCache_will_store_to_cache_if_content_type_not_already_added()
         {
             // Arrange
-            var storageHandler = new Mock<IStorageHandler>();            
+            var storageHandler = new Mock<IStorageHandler<Content>>();            
             storageHandler.Setup(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()));
-            var cache = new LocalCache(storageHandler.Object);
+            var cache = new LocalCache<Content>(storageHandler.Object);
             var footerContent = new Content
             {
                 Sections = new List<ContentSection>
@@ -32,7 +32,7 @@ namespace Veneer.Client.Tests
             };
 
             // Act
-            cache.WriteToCache(ContentTypes.Footer, footerContent);
+            cache.WriteToCache(ContentTypes.Footer, footerContent, DateTime.Now);
 
             // Assert            
             storageHandler.Verify(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()), Times.Once);
@@ -43,10 +43,10 @@ namespace Veneer.Client.Tests
         {
             // Arrange
             var contentRefreshDate = new DateTime(2014, 07, 07, 12, 30, 0);
-            var storageHandler = new Mock<IStorageHandler>();
+            var storageHandler = new Mock<IStorageHandler<Content>>();
             
             storageHandler.Setup(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()));
-            var cache = new LocalCache(storageHandler.Object);
+            var cache = new LocalCache<Content>(storageHandler.Object);
             var footerContent = new Content
             {                
                 Sections = new List<ContentSection>
@@ -61,8 +61,8 @@ namespace Veneer.Client.Tests
             };
 
             // Act
-            cache.WriteToCache(ContentTypes.Footer, footerContent);
-            cache.WriteToCache(ContentTypes.Footer, footerContent);
+            cache.WriteToCache(ContentTypes.Footer, footerContent, footerContent.RefreshDate);
+            cache.WriteToCache(ContentTypes.Footer, footerContent, footerContent.RefreshDate);
             
             // Assert            
             storageHandler.Verify(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()), Times.Once);
@@ -72,10 +72,10 @@ namespace Veneer.Client.Tests
         public void LocalCache_will_store_to_cache_if_content_type_exists_with_older_refresh_time()
         {
             // Arrange            
-            var storageHandler = new Mock<IStorageHandler>();
+            var storageHandler = new Mock<IStorageHandler<Content>>();
 
             storageHandler.Setup(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()));
-            var cache = new LocalCache(storageHandler.Object);
+            var cache = new LocalCache<Content>(storageHandler.Object);
 
             var oldFooterContent = new Content
             {
@@ -104,8 +104,8 @@ namespace Veneer.Client.Tests
             };
 
             // Act
-            cache.WriteToCache(ContentTypes.Footer, oldFooterContent);
-            cache.WriteToCache(ContentTypes.Footer, newFooterContent);
+            cache.WriteToCache(ContentTypes.Footer, oldFooterContent, oldFooterContent.RefreshDate);
+            cache.WriteToCache(ContentTypes.Footer, newFooterContent, newFooterContent.RefreshDate);
 
             // Assert            
             storageHandler.Verify(x => x.WriteToStorage(It.IsAny<ContentTypes>(), It.IsAny<Content>()), Times.Exactly(2));
@@ -127,9 +127,9 @@ namespace Veneer.Client.Tests
                     }
                 }
             };
-            var storageHandler = new Mock<IStorageHandler>();
+            var storageHandler = new Mock<IStorageHandler<Content>>();
             storageHandler.Setup(x => x.ReadFromStorage(ContentTypes.HeaderWithoutMegaNav)).Returns(cachedContent);
-            var cache = new LocalCache(storageHandler.Object);
+            var cache = new LocalCache<Content>(storageHandler.Object);
 
             // Act
             var footerWithoutMegaNav = cache.ReadFromCache(ContentTypes.HeaderWithoutMegaNav);
@@ -142,9 +142,9 @@ namespace Veneer.Client.Tests
         public void LocalCache_will_return_null_if_content_does_not_exist_in_cache()
         {
             // Arrange            
-            var storageHandler = new Mock<IStorageHandler>();
+            var storageHandler = new Mock<IStorageHandler<Content>>();
             storageHandler.Setup(x => x.ReadFromStorage(ContentTypes.HeaderWithoutMegaNav)).Returns((Content)null);
-            var cache = new LocalCache(storageHandler.Object);
+            var cache = new LocalCache<Content>(storageHandler.Object);
 
             // Act
             var footerWithoutMegaNav = cache.ReadFromCache(ContentTypes.HeaderWithoutMegaNav);
