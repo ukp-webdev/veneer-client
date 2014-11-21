@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Html.Partial("_Styles")
-    @Html.Partial("_Scripts")    
+    @Html.Partial("_Scripts")
 </head>
 <body class="main">
-    <div id="wrapper">        
-        @Html.Content(Model, ContentTypes.Intranet_Header_Commons)
+    <div id="wrapper">
+        @Html.Content(Model, ContentTypes.Intranet_Header_Lords)
 
         @RenderBody()
-        
+
         @Html.Content(Model, ContentTypes.Intranet_FatFooter)
         @Html.Content(Model, ContentTypes.Intranet_ThinFooter)
     </div>

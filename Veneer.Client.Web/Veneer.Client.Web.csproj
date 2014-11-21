@@ -167,6 +167,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\VeneerClient.pubxml" />
+    <Content Include="Views\Shared\_LayoutLords.cshtml" />
+    <Content Include="Views\Home\Lords.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
