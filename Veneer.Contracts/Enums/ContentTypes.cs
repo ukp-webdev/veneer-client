@@ -11,6 +11,7 @@ namespace Veneer.Contracts.Enums
         Intranet_FatFooter,
         Intranet_Header,
         Intranet_Header_Commons,
-        Intranet_Header_Lords
+        Intranet_Header_Lords,
+        ExternalResearchBriefingsConfiguration
     }
 }
