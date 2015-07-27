@@ -12,6 +12,11 @@ namespace Veneer.Contracts.Enums
         Intranet_Header,
         Intranet_Header_Commons,
         Intranet_Header_Lords,
-        ExternalResearchBriefingsConfiguration
+        Intranet_Header_ResearchBriefings,
+        ExternalResearchBriefingsConfiguration,
+        ExternalResearchBriefingsLeftSideMenuChildList,
+        ExternalResearchBriefingsGlobalHeaderWithMegaNav,
+        InternalResearchBriefingsConfiguration,
+        InternalResearchBriefingsLeftSideMenuChildList
     }
 }
