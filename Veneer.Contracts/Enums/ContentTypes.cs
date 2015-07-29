@@ -17,6 +17,9 @@ namespace Veneer.Contracts.Enums
         ExternalResearchBriefingsLeftSideMenuChildList,
         ExternalResearchBriefingsGlobalHeaderWithMegaNav,
         InternalResearchBriefingsConfiguration,
-        InternalResearchBriefingsLeftSideMenuChildList
+        InternalResearchBriefingsLeftSideMenuChildList,
+        FooterMarkupOnly,
+        FatFooterMarkupOnly,
+        HeaderWithMegaNavWhatsOn
     }
 }
